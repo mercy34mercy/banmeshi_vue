@@ -14,6 +14,12 @@
   <div>
     <button @click="get_recipe()">検索</button>
   </div>
+  <div>
+    <tr v-for="data in this.datas " v-bind:key="data">
+        <th>{{data["recipeTitle"]}}</th>
+        <img v-bind:src="data['foodImageUrl']">
+            </tr>
+  </div>
   
 
 </template>
@@ -29,21 +35,20 @@ export default {
       material: {
         "data":[]
       },
+      
       mate:"",
       title:[],
-      getdata:""
+      url:[],
+      datas:null
   }),
   mounted(){
 
   },
   methods: {
     get_recipe(){
-
-
       axios.post('https://banmeshi.azurewebsites.net/get_db_recipe_one',this.material.data)
-      .then(function (response) {
-          console.log(response)
-  })
+      .then(response => (this.datas = response.data.data
+      ),)
   .catch(function (error) {
     console.log(error);
   });
@@ -55,3 +60,8 @@ export default {
   }
 }
 </script>
+<style lang="scss" scoped>
+img{
+  max-width: 800px;
+}
+</style>
