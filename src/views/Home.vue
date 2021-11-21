@@ -16,10 +16,10 @@
   </div>
   <div>
     <tr v-for="data in this.datas " v-bind:key="data">
-        <th>{{data["recipeTitle"]}}</th>                                                                                                                                                    
+        <th>{{data["recipeTitle"]}}</th>                                                                                                                                                                          
         <img v-bind:src="data['mediumImageUrl']">                                     
             </tr>
-  </div>
+  </div>                                              
 
 
 
