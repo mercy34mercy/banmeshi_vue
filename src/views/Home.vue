@@ -16,18 +16,18 @@
   </div>
   <div>
     <tr v-for="data in this.datas " v-bind:key="data">
-        <th>{{data["recipeTitle"]}}</th>
-        <img v-bind:src="data['foodImageUrl']">
+        <th>{{data["recipeTitle"]}}</th>                                                                                                                                                    
+        <img v-bind:src="data['mediumImageUrl']">                                     
             </tr>
   </div>
-  
-  
+
+
 
 </template>
 <script>
 import axios from "axios";
 
-export default {
+export default {                                                                  
   name: 'Home',
   components: {
     
@@ -47,11 +47,13 @@ export default {
   },
   methods: {
     get_recipe(){
-      axios.post('https://banmeshi.azurewebsites.net/get_db_recipe_one',this.material.data)
-      .then(response => (this.datas = response.data.data
+      axios.post('https://banmeshirakuten.azurewebsites.net/get_db_recipe_one',this.material)
+      .then(response => (this.datas = response.data.data,console.log(response.data)
+    
       ),)
   .catch(function (error) {
     console.log(error);
+      
   });
     },
     add_material(){
