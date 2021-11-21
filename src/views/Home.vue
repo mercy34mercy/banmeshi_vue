@@ -29,7 +29,7 @@
             ><button>レシピ詳細</button></a
           >
         </th>
-        <th><img v-bind:src="data['mediumImageUrl']" /></th>
+        <th><img v-bind:src="data['   ']" /></th>
       </tr>
     </table>
   </div>
@@ -64,7 +64,7 @@ export default {
       // console.log(this.material.data);
       axios
         .post(
-          "https://banmeshirakuten.azurewebsites.net/get_db_recipe_one",
+          "https://banmeshii.herokuapp.com/get_db_recipe_one",
           this.material
         )
         .then(
