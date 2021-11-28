@@ -29,7 +29,7 @@
             ><button>レシピ詳細</button></a
           >
         </th>
-        <th><img v-bind:src="data['   ']" /></th>
+        <th><img v-bind:src="data['mediumImageUrl']" /></th>
       </tr>
     </table>
   </div>
