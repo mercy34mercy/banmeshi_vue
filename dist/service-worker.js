@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.2a9c649921452c4f974b05bc279c88f5.js"
+  "/precache-manifest.27ca7374f4549a353bca9244ff9554e7.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "banmeshi"});
