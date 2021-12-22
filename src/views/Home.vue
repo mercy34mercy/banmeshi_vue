@@ -51,7 +51,7 @@
             <th>
               <a :href="data['recipeUrl']" target="”_blank”"><button>レシピ詳細</button></a>
             </th>
-            <th><img v-bind:src="data['   ']" /></th>
+            <th><img v-bind:src="data['mediumImageUrl']" /></th>
           </tr>
         </tbody>
       </table>
@@ -92,7 +92,7 @@ export default {
       // console.log(this.material.data);
       axios
         .post(
-          "https://banmeshii.herokuapp.com/get_db_recipe_one",
+          "https://banmeshii.herokuapp.com/get_recipe",
           this.material
         )
         .then(
