@@ -18,7 +18,7 @@
     <div v-show="show">
       <div class="row">
         <div v-for="data in this.datas" v-bind:key="data">
-          <div class="recipe-box col-3">
+          <div class="recipe-box col-3 mw-1">
             <div><img v-bind:src="data['   ']" /></div>
             <div>{{ data["recipeTitle"] }}</div>
             <div>{{ data["recipeMaterial"] }}</div>
