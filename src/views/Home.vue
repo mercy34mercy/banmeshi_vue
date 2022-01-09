@@ -1,38 +1,36 @@
 <template>
-  <div class="container h-100">
+  <div class="container h-100 w-100">
     <div class="home">
     <img alt="Vue logo" src="../assets/logo.png" />
     </div>
     <div class="row justify-content-center pt-4 align-items-center">
-      <div class="col-5 col-sm-4 search">
+      <div class="search col-5 col-sm-4">
         <div class="row justify-content-center">
-          <input type="text" v-model="mate" placeholder="食材を入力" class="col-9 p-0 ps-2 search-input"/>
-          <button @click="get_recipe()" :disabled="button_state" class="col-2 col-md-1 search-button p-0 pe-sm-1">
+          <input type="text" v-model="mate" placeholder="食材を入力" class="search-input col-9 p-0 ps-2"/>
+          <button @click="get_recipe()" :disabled="button_state" class="search-button col-2 col-md-1 p-0 pe-sm-1">
           </button>
         </div>
       </div>
     </div>
     <div class="row pt-4 justify-content-center">
-      <button class="col-2">なんでも</button>
+      <button class="random-button col-3 col-sm-1 p-0">盤めし</button>
     </div>
     <div v-show="show">
-      <div class="row">
-        <div v-for="data in this.datas" v-bind:key="data">
-          <div class="recipe-box col-3 mw-1">
-            <div><img v-bind:src="data['   ']" /></div>
-            <div>{{ data["recipeTitle"] }}</div>
-            <div>{{ data["recipeMaterial"] }}</div>
-            <div>{{ data["recipeCost"] }}</div>
-            <a :href="data['recipeUrl']" target="”_blank”"><button>レシピ詳細</button></a>
-          </div>
-        </div>
-      </div>
-      <div class="row justify-content-center">
+            <div class="row justify-content-center">
         <div v-for="item in this.material.data" v-bind:key="item" class="col-1 p-0">
           <div>{{ item }}</div>
         </div>
       </div>
-      <div style="text-align: center">
+      <div class="row justify-content-center">
+        <div v-for="data in this.datas" v-bind:key="data" class="recipe-box col-10 col-sm-3 m-3">
+            <div><img v-bind:src="data['mediumImageUrl']" class="h-auto"></div>
+            <div>{{ data["recipeTitle"] }}</div>
+            <div>{{ data["recipeMaterial"] }}</div>
+            <div>{{ data["recipeCost"] }}</div>
+            <a :href="data['recipeUrl']" target="”_blank”"><button>レシピ詳細</button></a>
+        </div>
+      </div>
+      <!-- <div style="text-align: center">
       <table class="table">
         <thead>
           <tr>
@@ -55,7 +53,7 @@
           </tr>
         </tbody>
       </table>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -145,7 +143,17 @@ img {
   background-position: center;
 }
 
+.random-button{
+  border-radius: 40px;
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+  color: #fcfdfe;
+  border: none;
+  outline: none;
+  background-color: #fe7a47;
+}
+
 .recipe-box{
   background-color:#f5ca99;
+  // max-width: 350px;
 }
 </style>
