@@ -13,7 +13,7 @@
       </div>
     </div>
     <div class="row pt-4 justify-content-center">
-      <button class="random-button col-3 col-sm-1 p-0" v-on="random_">盤めし</button>
+      <button class="random-button col-3 col-sm-1 p-0" @click="random()">盤めし</button>
     </div>
     <div v-show="show">
             <div class="row justify-content-center">
@@ -77,6 +77,20 @@ export default {
   }),
   mounted() {},
   methods: {
+    random(){
+      axios
+        .get(
+          "https://banmeshii.herokuapp.com/random_one"
+        )
+        .then(
+          (response) => (
+            (this.datas = response.data.data)
+          )
+        )
+        .catch(function (error) {
+          console.log(error);
+        });
+    },
     get_recipe() {
       this.show = true;
       this.button_state = true;
