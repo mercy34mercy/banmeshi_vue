@@ -25,7 +25,9 @@
         <div v-for="data in this.datas" v-bind:key="data" class="recipe-box col-10 col-sm-3 m-3">
             <div><img v-bind:src="data['mediumImageUrl']" class="h-auto"></div>
             <div>{{ data["recipeTitle"] }}</div>
-            <div>{{ data["recipeMaterial"] }}</div>
+            <div>{{ data["recipeMaterial"][0]}}</div>
+            <div>{{ data["recipeMaterial"][1]}}</div>
+            <div>{{ data["recipeMaterial"][2]}}</div>
             <div>{{ data["recipeCost"] }}</div>
             <a :href="data['recipeUrl']" target="”_blank”"><button>レシピ詳細</button></a>
         </div>
@@ -73,7 +75,8 @@ export default {
     url: [],
     datas: null,
     button_state: false,
-    show: true
+    show: true,
+    recipe_material:[]
   }),
   mounted() {},
   methods: {
