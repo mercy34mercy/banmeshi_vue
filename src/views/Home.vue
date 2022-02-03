@@ -6,56 +6,38 @@
     <div class="row justify-content-center pt-4 align-items-center">
       <div class="search col-5 col-sm-4">
         <div class="row justify-content-center">
-          <input type="text" v-model="mate" placeholder="食材を入力" class="search-input col-9 p-0 ps-2"/>
+          <input type="text" v-model="mate" placeholder="食材を入力" class="search-input col-9 p-2"/>
           <button @click="get_recipe()" :disabled="button_state" class="search-button col-2 col-md-1 p-0 pe-sm-1">
           </button>
         </div>
       </div>
     </div>
     <div class="row pt-4 justify-content-center">
-      <button class="random-button col-3 col-sm-1 p-0" @click="random()">盤めし</button>
+      <button class="random-button col-4 col-xs-1 p-0 pt-2 pb-2" @click="random()">今日の晩飯</button>
     </div>
     <div v-show="show">
-            <div class="row justify-content-center">
-        <div v-for="item in this.material.data" v-bind:key="item" class="col-1 p-0">
+      <div class="row justify-content-center">
+        <div v-for="item in this.material.data" v-bind:key="item" class="col-3 col-xs-1 p-0 mt-3">
           <div>{{ item }}</div>
         </div>
       </div>
-      <div class="row justify-content-center">
-        <div v-for="data in this.datas" v-bind:key="data" class="recipe-box col-10 col-sm-3 m-3">
-            <div><img v-bind:src="data['mediumImageUrl']" class="h-auto"></div>
-            <div>{{ data["recipeTitle"] }}</div>
-            <div>{{ data["recipeMaterial"][0]}}</div>
-            <div>{{ data["recipeMaterial"][1]}}</div>
-            <div>{{ data["recipeMaterial"][2]}}</div>
-            <div>{{ data["recipeCost"] }}</div>
-            <a :href="data['recipeUrl']" target="”_blank”"><button>レシピ詳細</button></a>
+      <div class="row justify-content-center mw-100 m-auto" >
+        <div v-for="data in this.datas" v-bind:key="data" class="recipe-box col-lg-5 col-md-5 col-xs-9 m-3 ">
+          <div class="row align-items-center justify-content-center" style="height:300px;">
+            <div class="col-5"><img v-bind:src="data['foodImageUrl']" class="w-100 mt-2" style="height:230px; object-fit:cover;"></div>
+            <div class="col-6" style="text-align:left;">
+              <div class="fw-bold recipe-title" style="height: 4.5rem;">{{ data["recipeTitle"] }}</div>
+              <div style="height:1.5rem;"></div>
+              <div class="text-truncate">{{ data["recipeMaterial"][0]}}</div>
+              <div class="text-truncate">{{ data["recipeMaterial"][1]}}</div>
+              <div class="text-truncate">{{ data["recipeMaterial"][2]}}</div>
+              <div style="height:1.5rem;"></div>
+              <div>{{ data["recipeCost"] }}</div>
+            </div>
+              <a :href="data['recipeUrl']" target="”_blank”"><button class="recipe-button">レシピ詳細</button></a>
+          </div>
         </div>
       </div>
-      <!-- <div style="text-align: center">
-      <table class="table">
-        <thead>
-          <tr>
-            <th class="col">タイトル</th>
-            <th class="col">材料</th>
-            <th class="col">値段</th>
-            <th class="col">詳細</th>
-            <th class="col"></th>
-        </tr>
-        </thead>
-        <tbody>
-          <tr v-for="data in this.datas" v-bind:key="data">
-            <th>{{ data["recipeTitle"] }}</th>
-            <th>{{ data["recipeMaterial"] }}</th>
-            <th>{{ data["recipeCost"] }}</th>
-            <th>
-              <a :href="data['recipeUrl']" target="”_blank”"><button>レシピ詳細</button></a>
-            </th>
-            <th><img v-bind:src="data['mediumImageUrl']" /></th>
-          </tr>
-        </tbody>
-      </table>
-      </div> -->
     </div>
   </div>
 </template>
@@ -172,5 +154,20 @@ img {
 .recipe-box{
   background-color:#f5ca99;
   // max-width: 350px;
+}
+
+.recipe-button{
+  border-radius: 40px;
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+  color: #fcfdfe;
+  border: none;
+  outline: none;
+  background-color: #d8412f;
+}
+
+.recipe-title{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    overflow-wrap: break-word;
 }
 </style>
