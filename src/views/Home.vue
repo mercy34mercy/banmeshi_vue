@@ -1,7 +1,7 @@
 <template>
   <div class="container h-100 w-100">
     <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
+    <img alt="Vue logo" src="../assets/artboard.png" />
     </div>
     <div class="row justify-content-center pt-4 align-items-center">
       <div class="search col-5 col-sm-4">
@@ -43,7 +43,6 @@
 </template>
 <script>
 import axios from "axios";
-import 'bootstrap/dist/css/bootstrap.css';
 
 export default {
   name: "Home",
