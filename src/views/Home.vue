@@ -62,11 +62,11 @@ export default {
       latitude: 135
     })
 
-    const datas = reactive(["ssss"])
+    const datas = reactive({})
     const button_state = ref(false)
     const show = ref(false)
     const recipe_material = ref(false)
-    const mate = ref<String>("")
+    const mate = ref("")
     const material = ref([])
 
 

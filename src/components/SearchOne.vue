@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { inject } from 'vue'
+import { inject, reactive } from 'vue'
 import axios from "axios";
 
 
@@ -19,8 +19,7 @@ export default {
     const userLocation = inject < String > ('location', 'The Universe')
     const userGeolocation = inject < { userGeolocation: 0, latitude: 20 } > ('geolocation')
     const updateUserLocation = inject('updateLocation')
-
-    const datas = inject('datas', [] )
+    const datas = reactive(inject('datas', [] ))
 
 
     return {
