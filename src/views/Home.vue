@@ -1,32 +1,42 @@
 <template>
-  <div class="container h-100 w-100">
+  <div class="container h-100 w-100 justify-content-center align-self-center">
     <div class="home">
-    <img alt="Vue logo" src="../assets/artboard.png" />
+      <img alt="Vue logo" src="../assets/artboard.png" />
     </div>
     <SearchBar></SearchBar>
-    <div class="row pt-4 justify-content-center">
-      <button class="random-button col-4 col-xs-1 p-0 pt-2 pb-2" @click="random()">今日の晩飯</button>
-    </div>
+    <SearchOne></SearchOne>
     <div v-show="show">
       <div class="row justify-content-center">
         <div v-for="item in this.material.data" v-bind:key="item" class="col-3 col-xs-1 p-0 mt-3">
           <div>{{ item }}</div>
         </div>
       </div>
-      <div class="row justify-content-center mw-100 m-auto" >
-        <div v-for="data in this.datas" v-bind:key="data" class="recipe-box col-lg-5 col-md-5 col-xs-9 m-3 ">
+      <div class="row justify-content-center mw-100 m-auto">
+        <div
+          v-for="data in this.datas"
+          v-bind:key="data"
+          class="recipe-box col-lg-5 col-md-5 col-xs-9 m-3"
+        >
           <div class="row align-items-center justify-content-center" style="height:300px;">
-            <div class="col-5"><img v-bind:src="data['foodImageUrl']" class="w-100 mt-2" style="height:230px; object-fit:cover;"></div>
+            <div class="col-5">
+              <img
+                v-bind:src="data['foodImageUrl']"
+                class="w-100 mt-2"
+                style="height:230px; object-fit:cover;"
+              />
+            </div>
             <div class="col-6" style="text-align:left;">
               <div class="fw-bold recipe-title" style="height: 4.5rem;">{{ data["recipeTitle"] }}</div>
               <div style="height:1.5rem;"></div>
-              <div class="text-truncate">{{ data["recipeMaterial"][0]}}</div>
-              <div class="text-truncate">{{ data["recipeMaterial"][1]}}</div>
-              <div class="text-truncate">{{ data["recipeMaterial"][2]}}</div>
+              <div class="text-truncate">{{ data["recipeMaterial"][0] }}</div>
+              <div class="text-truncate">{{ data["recipeMaterial"][1] }}</div>
+              <div class="text-truncate">{{ data["recipeMaterial"][2] }}</div>
               <div style="height:1.5rem;"></div>
               <div>{{ data["recipeCost"] }}</div>
             </div>
-              <a :href="data['recipeUrl']" target="”_blank”"><button class="recipe-button">レシピ詳細</button></a>
+            <a :href="data['recipeUrl']" target="”_blank”">
+              <button class="recipe-button">レシピ詳細</button>
+            </a>
           </div>
         </div>
       </div>
@@ -34,70 +44,110 @@
   </div>
 </template>
 <script>
-import axios from "axios";
+// import axios from "axios";
 import SearchBar from '@/components/SearchBar'
+import SearchOne from '@/components/SearchOne'
+import { provide, ref, reactive } from "vue";
 
 export default {
   name: "Home",
   components: {
     SearchBar,
+    SearchOne,
+  },
+  setup() {
+    const location = ref('hahahahahhah')
+    const geolocation = reactive({
+      userGeolocation: 90,
+      latitude: 135
+    })
+
+    const datas = reactive(["ssss"])
+    const button_state = ref(false)
+    const show = ref(false)
+    const recipe_material = ref(false)
+    const mate = ref<String>("")
+    const material = ref([])
+
+
+    const updateLocation = () => {
+      location.value = 'South Pole'
+    }
+
+    provide('location', location)
+    provide('geolocation', geolocation)
+    provide('updateLocation', updateLocation)
+
+    provide('datas', datas)
+
+    return {
+      location,
+      datas,
+      button_state,
+      show,
+      recipe_material,
+      mate,
+      material
+    }
   },
   data: () => ({
-    material: {
-      data: [],
-    },
-    mate: "",
-    title: [],
-    url: [],
-    datas: null,
-    button_state: false,
-    show: true,
-    recipe_material:[]
+    // material: {
+    //   data: [],
+    // },
+    // mate: "",
+    // title: [],
+    // url: [],
+    // datas: null,
+    // button_state: false,
+    // show: true,
+    // recipe_material: []
   }),
-  mounted() {},
+
+  mounted() { },
   methods: {
-    random(){
-      axios
-        .get(
-          "https://banmeshii.herokuapp.com/random_one"
-        )
-        .then(
-          (response) => (
-            (this.datas = response.data.data)
-          )
-        )
-        .catch(function (error) {
-          console.log(error);
-        });
-    },
-    get_recipe() {
-      this.show = true;
-      this.button_state = true;
-      this.material.data = this.mate.replaceAll("　", " ").split(" ");
-      if (this.material.data[0] == "") {
-        window.alert("材料を入力してください");
-        this.button_state = false;
-        this.show = false;
-        return null;
-      }
-      // console.log(this.material.data);
-      axios
-        .post(
-          "https://banmeshii.herokuapp.com/get_recipe",
-          this.material
-        )
-        .then(
-          (response) => (
-            (this.datas = response.data.data),
-            // console.log(response.data),
-            (this.button_state = false)
-          )
-        )
-        .catch(function (error) {
-          console.log(error);
-          this.button_state = false;
-        });
-    },
+    // random() {
+    //   axios
+    //     .get(
+    //       "https://banmeshii.herokuapp.com/random_one"
+    //     )
+    //     .then(
+    //       (response) => (
+    //         (this.datas = response.data.data)
+    //       )
+    //     )
+    //     .catch(function (error) {
+    //       console.log(error);
+    //     });
+    // },
+
+    // get_recipe() {
+    //   this.show = true;
+    //   this.button_state = true;
+    //   this.material.data = this.mate.replaceAll("", " ").split(" ");
+    //   if (this.material.data[0] == "") {
+    //     window.alert("材料を入力してください");
+    //     this.button_state = false;
+    //     this.show = false;
+    //     return null;
+    //   }
+    //   // console.log(this.material.data);
+    //   axios
+    //     .post(
+    //       "https://banmeshii.herokuapp.com/get_recipe",
+    //       this.material
+    //     )
+    //     .then(
+    //       (response) => (
+    //         (this.datas = response.data.data),
+    //         // console.log(response.data),
+    //         (this.button_state = false)
+    //       )
+    //     )
+    //     .catch(function (error) {
+    //       console.log(error);
+    //       this.button_state = false;
+    //     });
+    // },
   },
 };
 </script>
@@ -107,28 +157,19 @@ export default {
 //papaya #fe7a47
 //granola #f5ca99
 //black #100E29
-*{
-  color:#100E29;
+* {
+  color: #100e29;
 }
 img {
   max-width: 800px;
 }
 
-.random-button{
-  border-radius: 40px;
-  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-  color: #fcfdfe;
-  border: none;
-  outline: none;
-  background-color: #fe7a47;
-}
-
-.recipe-box{
-  background-color:#f5ca99;
+.recipe-box {
+  background-color: #f5ca99;
   // max-width: 350px;
 }
 
-.recipe-button{
+.recipe-button {
   border-radius: 40px;
   box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
   color: #fcfdfe;
@@ -137,9 +178,9 @@ img {
   background-color: #d8412f;
 }
 
-.recipe-title{
-    text-overflow: ellipsis;
-    overflow: hidden;
-    overflow-wrap: break-word;
+.recipe-title {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  overflow-wrap: break-word;
 }
 </style>
