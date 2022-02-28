@@ -81,12 +81,20 @@ export default {
     const material22 = reactive({
       data:[],
     })
+    const button_state22 = ref(false)
+    const show22 = ref(true)
+    const datas22 = ref([])
 
 
 
     provide('location', location)
     provide('geolocation', geolocation)
     provide('updateLocation', updateLocation)
+
+    provide('material22', material22)
+    provide('button_state22', button_state22)
+    provide('show22', show22)
+    provide('datas22', datas22)
   },
   data: () => ({
     material: {
