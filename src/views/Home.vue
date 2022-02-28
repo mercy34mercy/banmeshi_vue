@@ -1,14 +1,18 @@
 <template>
   <div class="container h-100 w-100">
     <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
+      <img alt="Vue logo" src="../assets/artboard.png" />
     </div>
+    <SearchBar></SearchBar>
     <div class="row justify-content-center pt-4 align-items-center">
       <div class="search col-5 col-sm-4">
         <div class="row justify-content-center">
-          <input type="text" v-model="mate" placeholder="食材を入力" class="search-input col-9 p-2"/>
-          <button @click="get_recipe()" :disabled="button_state" class="search-button col-2 col-md-1 p-0 pe-sm-1">
-          </button>
+          <input type="text" v-model="mate" placeholder="食材を入力" class="search-input col-9 p-2" />
+          <button
+            @click="get_recipe()"
+            :disabled="button_state"
+            class="search-button col-2 col-md-1 p-0 pe-sm-1"
+          ></button>
         </div>
       </div>
     </div>
@@ -21,20 +25,32 @@
           <div>{{ item }}</div>
         </div>
       </div>
-      <div class="row justify-content-center mw-100 m-auto" >
-        <div v-for="data in this.datas" v-bind:key="data" class="recipe-box col-lg-5 col-md-5 col-xs-9 m-3 ">
+      <div class="row justify-content-center mw-100 m-auto">
+        <div
+          v-for="data in this.datas"
+          v-bind:key="data"
+          class="recipe-box col-lg-5 col-md-5 col-xs-9 m-3"
+        >
           <div class="row align-items-center justify-content-center" style="height:300px;">
-            <div class="col-5"><img v-bind:src="data['foodImageUrl']" class="w-100 mt-2" style="height:230px; object-fit:cover;"></div>
+            <div class="col-5">
+              <img
+                v-bind:src="data['foodImageUrl']"
+                class="w-100 mt-2"
+                style="height:230px; object-fit:cover;"
+              />
+            </div>
             <div class="col-6" style="text-align:left;">
               <div class="fw-bold recipe-title" style="height: 4.5rem;">{{ data["recipeTitle"] }}</div>
               <div style="height:1.5rem;"></div>
-              <div class="text-truncate">{{ data["recipeMaterial"][0]}}</div>
-              <div class="text-truncate">{{ data["recipeMaterial"][1]}}</div>
-              <div class="text-truncate">{{ data["recipeMaterial"][2]}}</div>
+              <div class="text-truncate">{{ data["recipeMaterial"][0] }}</div>
+              <div class="text-truncate">{{ data["recipeMaterial"][1] }}</div>
+              <div class="text-truncate">{{ data["recipeMaterial"][2] }}</div>
               <div style="height:1.5rem;"></div>
               <div>{{ data["recipeCost"] }}</div>
             </div>
-              <a :href="data['recipeUrl']" target="”_blank”"><button class="recipe-button">レシピ詳細</button></a>
+            <a :href="data['recipeUrl']" target="”_blank”">
+              <button class="recipe-button">レシピ詳細</button>
+            </a>
           </div>
         </div>
       </div>
@@ -43,11 +59,35 @@
 </template>
 <script>
 import axios from "axios";
-import 'bootstrap/dist/css/bootstrap.css';
+import SearchBar from "../components/SearchBar.vue";
+import { provide, ref, reactive } from "vue";
 
 export default {
   name: "Home",
-  components: {},
+  components: {
+    SearchBar
+  },
+  
+  setup() {
+    const location = ref('North Pole')
+    const geolocation = reactive({
+      longitude: 90,
+      latitude: 135
+    })
+    const updateLocation = () => {
+      location.value = Math.random()*100*Math.random()
+    }
+
+    const material22 = reactive({
+      data:[],
+    })
+
+
+
+    provide('location', location)
+    provide('geolocation', geolocation)
+    provide('updateLocation', updateLocation)
+  },
   data: () => ({
     material: {
       data: [],
@@ -58,11 +98,11 @@ export default {
     datas: null,
     button_state: false,
     show: true,
-    recipe_material:[]
+    recipe_material: []
   }),
-  mounted() {},
+  mounted() { },
   methods: {
-    random(){
+    random() {
       axios
         .get(
           "https://banmeshii.herokuapp.com/random_one"
@@ -113,14 +153,14 @@ export default {
 //papaya #fe7a47
 //granola #f5ca99
 //black #100E29
-*{
-  color:#100E29;
+* {
+  color: #100e29;
 }
 img {
   max-width: 800px;
 }
 
-.search{
+.search {
   // border: solid;
   border-radius: 40px;
   box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
@@ -128,7 +168,7 @@ img {
 
 .search-input {
   background: none;
-  color: #100E29;
+  color: #100e29;
   border: none;
   outline: none;
 }
@@ -137,12 +177,12 @@ img {
   border: none;
   cursor: pointer;
   background: none;
-  background-image:url("../assets/baseline_search_black_24dp.png");
+  background-image: url("../assets/baseline_search_black_24dp.png");
   background-repeat: no-repeat;
   background-position: center;
 }
 
-.random-button{
+.random-button {
   border-radius: 40px;
   box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
   color: #fcfdfe;
@@ -151,12 +191,12 @@ img {
   background-color: #fe7a47;
 }
 
-.recipe-box{
-  background-color:#f5ca99;
+.recipe-box {
+  background-color: #f5ca99;
   // max-width: 350px;
 }
 
-.recipe-button{
+.recipe-button {
   border-radius: 40px;
   box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
   color: #fcfdfe;
@@ -165,9 +205,9 @@ img {
   background-color: #d8412f;
 }
 
-.recipe-title{
-    text-overflow: ellipsis;
-    overflow: hidden;
-    overflow-wrap: break-word;
+.recipe-title {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  overflow-wrap: break-word;
 }
 </style>
