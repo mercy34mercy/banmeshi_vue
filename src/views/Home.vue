@@ -5,9 +5,18 @@
     </div>
     <SearchBar></SearchBar>
     <SearchOne></SearchOne>
+
+    <div>location {{ location }}</div>
+    <div>datas {{ datas }}</div>
+    <div>refData {{ refData }}</div>
+
     <div v-show="show">
       <div class="row justify-content-center">
-        <div v-for="item in this.material.data" v-bind:key="item" class="col-3 col-xs-1 p-0 mt-3">
+<!--        <div
+          v-for="item in this.material.data"
+          v-bind:key="item"
+          class="col-3 col-xs-1 p-0 mt-3"
+        >
           <div>{{ item }}</div>
         </div>
       </div>
@@ -17,36 +26,41 @@
           v-bind:key="data"
           class="recipe-box col-lg-5 col-md-5 col-xs-9 m-3"
         >
-          <div class="row align-items-center justify-content-center" style="height:300px;">
+          <div
+            class="row align-items-center justify-content-center"
+            style="height: 300px"
+          >
             <div class="col-5">
               <img
                 v-bind:src="data['foodImageUrl']"
                 class="w-100 mt-2"
-                style="height:230px; object-fit:cover;"
+                style="height: 230px; object-fit: cover"
               />
             </div>
-            <div class="col-6" style="text-align:left;">
-              <div class="fw-bold recipe-title" style="height: 4.5rem;">{{ data["recipeTitle"] }}</div>
-              <div style="height:1.5rem;"></div>
+            <div class="col-6" style="text-align: left">
+              <div class="fw-bold recipe-title" style="height: 4.5rem">
+                {{ data["recipeTitle"] }}
+              </div>
+              <div style="height: 1.5rem"></div>
               <div class="text-truncate">{{ data["recipeMaterial"][0] }}</div>
               <div class="text-truncate">{{ data["recipeMaterial"][1] }}</div>
               <div class="text-truncate">{{ data["recipeMaterial"][2] }}</div>
-              <div style="height:1.5rem;"></div>
+              <div style="height: 1.5rem"></div>
               <div>{{ data["recipeCost"] }}</div>
             </div>
             <a :href="data['recipeUrl']" target="”_blank”">
               <button class="recipe-button">レシピ詳細</button>
             </a>
           </div>
-        </div>
+        </div>-->
       </div>
     </div>
   </div>
 </template>
 <script>
 // import axios from "axios";
-import SearchBar from '@/components/SearchBar'
-import SearchOne from '@/components/SearchOne'
+import SearchBar from "@/components/SearchBar";
+import SearchOne from "@/components/SearchOne";
 import { provide, ref, reactive } from "vue";
 
 export default {
@@ -56,39 +70,44 @@ export default {
     SearchOne,
   },
   setup() {
-    const location = ref('hahahahahhah')
+    const location = ref("hahahahahhah");
     const geolocation = reactive({
       userGeolocation: 90,
-      latitude: 135
-    })
+      latitude: 135,
+    });
 
-    const datas = reactive({})
-    const button_state = ref(false)
-    const show = ref(false)
-    const recipe_material = ref(false)
-    const mate = ref("")
-    const material = ref([])
 
+    const datas = ref({"recipeUrl":"recipeUrl"});
+    const refData = ref({"recipeUrl":"recipeUrl"});
+    const button_state = ref(false);
+    const show = ref(false);
+    const recipe_material = ref(false);
+    const mate = ref("");
+    const material = ref([]);
 
     const updateLocation = () => {
-      location.value = 'South Pole'
-    }
+      location.value = "South Pole";
+    };
 
-    provide('location', location)
-    provide('geolocation', geolocation)
-    provide('updateLocation', updateLocation)
+    provide("location", location);
+    provide("geolocation", geolocation);
+    provide("updateLocation", updateLocation);
 
-    provide('datas', datas)
+    provide("datas", datas);
+    provide("refData", refData);
 
     return {
       location,
+      geolocation,
+      updateLocation,
       datas,
+      refData,
       button_state,
       show,
       recipe_material,
       mate,
-      material
-    }
+      material,
+    };
   },
   data: () => ({
     // material: {
@@ -103,7 +122,7 @@ export default {
     // recipe_material: []
   }),
 
-  mounted() { },
+  mounted() {},
   methods: {
     // random() {
     //   axios
@@ -119,7 +138,6 @@ export default {
     //       console.log(error);
     //     });
     // },
-
     // get_recipe() {
     //   this.show = true;
     //   this.button_state = true;
