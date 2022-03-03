@@ -5,15 +5,12 @@
     </div>
     <SearchBar></SearchBar>
     <SearchOne></SearchOne>
-
-    <div>location {{ location }}</div>
-    <div>datas {{ datas }}</div>
-    <div>refData {{ refData }}</div>
+    <div>refData {{ refData[0] }}</div>
 
     <div v-show="show">
       <div class="row justify-content-center">
-<!--        <div
-          v-for="item in this.material.data"
+        <div
+          v-for="item in this.material"
           v-bind:key="item"
           class="col-3 col-xs-1 p-0 mt-3"
         >
@@ -22,7 +19,7 @@
       </div>
       <div class="row justify-content-center mw-100 m-auto">
         <div
-          v-for="data in this.datas"
+          v-for="data in this.refData"
           v-bind:key="data"
           class="recipe-box col-lg-5 col-md-5 col-xs-9 m-3"
         >
@@ -42,9 +39,9 @@
                 {{ data["recipeTitle"] }}
               </div>
               <div style="height: 1.5rem"></div>
-              <div class="text-truncate">{{ data["recipeMaterial"][0] }}</div>
-              <div class="text-truncate">{{ data["recipeMaterial"][1] }}</div>
-              <div class="text-truncate">{{ data["recipeMaterial"][2] }}</div>
+              <div class="text-truncate">{{ data["recipeMaterial"] }}</div>
+              <!-- <div class="text-truncate">{{ data["recipeMaterial"][1] }}</div>
+              <div class="text-truncate">{{ data["recipeMaterial"][2] }}</div> -->
               <div style="height: 1.5rem"></div>
               <div>{{ data["recipeCost"] }}</div>
             </div>
@@ -52,7 +49,7 @@
               <button class="recipe-button">レシピ詳細</button>
             </a>
           </div>
-        </div>-->
+        </div>
       </div>
     </div>
   </div>
@@ -76,9 +73,16 @@ export default {
       latitude: 135,
     });
 
-
-    const datas = ref({"recipeUrl":"recipeUrl"});
-    const refData = ref({"recipeUrl":"recipeUrl"});
+    const refData = ref({
+      foodImageUrl: "",
+      mediumImageUrl: "",
+      recipeCost: "1090",
+      recipeId: "",
+      recipeMaterial: ["0", "1", "2"],
+      recipeTitle: "",
+      recipeUrl: "",
+      smallImageUrl: "",
+    });
     const button_state = ref(false);
     const show = ref(false);
     const recipe_material = ref(false);
@@ -93,14 +97,12 @@ export default {
     provide("geolocation", geolocation);
     provide("updateLocation", updateLocation);
 
-    provide("datas", datas);
     provide("refData", refData);
 
     return {
       location,
       geolocation,
       updateLocation,
-      datas,
       refData,
       button_state,
       show,
@@ -116,7 +118,7 @@ export default {
     // mate: "",
     // title: [],
     // url: [],
-    // datas: null,
+    // refData: null,
     // button_state: false,
     // show: true,
     // recipe_material: []
@@ -131,7 +133,7 @@ export default {
     //     )
     //     .then(
     //       (response) => (
-    //         (this.datas = response.data.data)
+    //         (this.refData = response.data.data)
     //       )
     //     )
     //     .catch(function (error) {
@@ -156,7 +158,7 @@ export default {
     //     )
     //     .then(
     //       (response) => (
-    //         (this.datas = response.data.data),
+    //         (this.refData = response.data.data),
     //         // console.log(response.data),
     //         (this.button_state = false)
     //       )

@@ -1,8 +1,6 @@
 <template>
   <div class="row pt-4 justify-content-center">
-    <button class="random-button col-4 col-xs-1 p-0 pt-2 pb-2" @click="random()">今日の晩飯deyo</button>
-
-    <div>userLocation {{childData}}</div>
+    <button class="random-button col-4 col-xs-1 p-0 pt-2 pb-2" @click="random()">今日の晩飯</button>
   </div>
 </template>
 
@@ -20,8 +18,7 @@ export default {
     const userLocation = inject ('location', 'The Universe')
     const userGeolocation = inject < { userGeolocation: 0, latitude: 20 } > ('geolocation')
     const updateUserLocation = inject('updateLocation')
-    const childData = inject ('datas', 'datas')
-    const childrefData = inject ('refdata', 'refdata')
+    const childData = inject ('refData', 'refData')
 
 
     return {
@@ -29,7 +26,6 @@ export default {
       userGeolocation,
       updateUserLocation,
       childData,
-      childrefData,
     }
   },
   methods: {
@@ -58,7 +54,7 @@ export default {
         )
         .then(
           (response) => (
-            (this.childData = response.data.data,this.childrefData = response.data.data,console.log("result is ",this.childData[0]))
+            (this.childData = response.data.data)
 
           )
         )
