@@ -10,7 +10,7 @@
     <div v-show="show">
       <div class="row justify-content-center">
         <div
-          v-for="item in this.material"
+          v-for="item in this.materials"
           v-bind:key="item"
           class="col-3 col-xs-1 p-0 mt-3"
         >
@@ -76,9 +76,9 @@ export default {
     const refData = ref({
       foodImageUrl: "",
       mediumImageUrl: "",
-      recipeCost: "1090",
+      recipeCost: "",
       recipeId: "",
-      recipeMaterial: ["0", "1", "2"],
+      recipeMaterial: [""],
       recipeTitle: "",
       recipeUrl: "",
       smallImageUrl: "",
@@ -87,7 +87,9 @@ export default {
     const show = ref(false);
     const recipe_material = ref(false);
     const mate = ref("");
-    const material = ref([]);
+    const materials = ref({
+      data:[]
+    });
 
     const updateLocation = () => {
       location.value = "South Pole";
@@ -108,11 +110,11 @@ export default {
       show,
       recipe_material,
       mate,
-      material,
+      materials,
     };
   },
   data: () => ({
-    // material: {
+    // materials: {
     //   data: [],
     // },
     // mate: "",
@@ -143,18 +145,18 @@ export default {
     // get_recipe() {
     //   this.show = true;
     //   this.button_state = true;
-    //   this.material.data = this.mate.replaceAll("", " ").split(" ");
-    //   if (this.material.data[0] == "") {
+    //   this.materials.data = this.mate.replaceAll("", " ").split(" ");
+    //   if (this.materials.data[0] == "") {
     //     window.alert("材料を入力してください");
     //     this.button_state = false;
     //     this.show = false;
     //     return null;
     //   }
-    //   // console.log(this.material.data);
+    //   // console.log(this.materials.data);
     //   axios
     //     .post(
     //       "https://banmeshii.herokuapp.com/get_recipe",
-    //       this.material
+    //       this.materials
     //     )
     //     .then(
     //       (response) => (

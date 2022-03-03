@@ -5,7 +5,7 @@
         <input type="text" v-model="mate" placeholder="食材を入力" class="search-input col-9 p-2" />
         <button
           @click="get_recipe()"
-          :disabled="button_state"
+          :disabled="buttonState"
           class="search-button col-2 col-md-1 p-0 pe-sm-1"
         ></button>
       </div>
@@ -27,42 +27,45 @@ export default {
     const userLocation = inject('location', 'The Universe')
     const userGeolocation = inject('geolocation')
     const updateUserLocation = inject('updateLocation')
-    const materials = inject('materials')
+    const materials = inject('materials',{data:[]})
+    const buttonState = inject('materials')
 
     return {
       userLocation,
       userGeolocation,
       updateUserLocation,
-      materials
+      materials,
+      buttonState,
     }
   },
   methods: {
     get_recipe() {
       this.show = true;
-      this.button_state = true;
-      this.material.data = this.mate.replaceAll("　", " ").split(" ");
-      if (this.material.data[0] == "") {
+      this.buttonState = true;
+      this.materials.data = this.mate.replaceAll("　", " ").split(" ");
+      console.log(this.materials)
+      if (this.materials.data[0] == "") {
         window.alert("材料を入力してください");
-        this.button_state = false;
+        this.buttonState = false;
         this.show = false;
         return null;
       }
-      // console.log(this.material.data);
+      console.log(this.materials.data);
       axios
         .post(
           "https://banmeshii.herokuapp.com/get_recipe",
-          this.material
+          this.materials
         )
         .then(
           (response) => (
             (this.datas = response.data.data),
-            // console.log(response.data),
-            (this.button_state = false)
+            console.log(response.data),
+            (this.buttonState = false)
           )
         )
         .catch(function (error) {
           console.log(error);
-          this.button_state = false;
+          this.buttonState = false;
         });
     },
   },
