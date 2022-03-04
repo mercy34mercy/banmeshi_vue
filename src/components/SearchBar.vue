@@ -2,7 +2,13 @@
   <div class="row justify-content-center pt-4 align-items-center">
     <div class="search col-5 col-sm-4">
       <div class="row justify-content-center">
-        <input type="text" v-model="mate" placeholder="食材を入力" class="search-input col-9 p-2" @keypress.enter="get_recipe()"/>
+        <input
+          type="text"
+          v-model="mate"
+          placeholder="食材を入力"
+          class="search-input col-9 p-2"
+          @keypress.enter="get_recipe()"
+        />
         <button
           @click="get_recipe()"
           :disabled="buttonState"
@@ -14,22 +20,22 @@
 </template>
 
 <script>
-import { inject } from 'vue'
+import { inject } from "vue";
 import axios from "axios";
 
-
 export default {
-  name: 'SearchBar',
+  name: "SearchBar",
   props: {
-    msg: String
+    msg: String,
   },
   setup() {
-    const userLocation = inject('location', 'The Universe')
-    const userGeolocation = inject('geolocation')
-    const updateUserLocation = inject('updateLocation')
-    const materials = inject('materials',{data:[]})
-    const buttonState = inject('button_state',false)
-    const Show = inject('show',false)
+    const userLocation = inject("location", "The Universe");
+    const userGeolocation = inject("geolocation");
+    const updateUserLocation = inject("updateLocation");
+    const materials = inject("materials", { data: [] });
+    const buttonState = inject("button_state", false);
+    const Show = inject("show", false);
+    const childData = inject("refData", "refData");
 
     return {
       userLocation,
@@ -38,31 +44,26 @@ export default {
       materials,
       buttonState,
       Show,
-    }
+      childData,
+    };
   },
   methods: {
     get_recipe() {
-      this.Show = true;
       this.buttonState = true;
       this.materials.data = this.mate.replaceAll("　", " ").split(" ");
-      console.log(this.materials)
       if (this.materials.data[0] == "") {
         window.alert("材料を入力してください");
         this.buttonState = false;
         this.Show = false;
         return null;
       }
-      console.log(this.materials.data);
       axios
-        .post(
-          "https://banmeshii.herokuapp.com/get_recipe",
-          this.materials
-        )
+        .post("https://banmeshii.herokuapp.com/get_recipe", this.materials)
         .then(
           (response) => (
-            (this.datas = response.data.data),
-            console.log(response.data),
-            (this.buttonState = false)
+            (this.childData = response.data.data),
+            (this.buttonState = false),
+            (this.Show = true)
           )
         )
         .catch(function (error) {
@@ -71,7 +72,7 @@ export default {
         });
     },
   },
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

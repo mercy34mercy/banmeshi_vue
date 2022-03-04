@@ -8,7 +8,7 @@
     <div v-show="show">
       <div class="row justify-content-center">
         <div
-          v-for="item in this.materials"
+          v-for="item in this.materials.data"
           v-bind:key="item"
           class="col-3 col-xs-1 p-0 mt-3"
         >
@@ -37,9 +37,12 @@
                 {{ data["recipeTitle"] }}
               </div>
               <div style="height: 1.5rem"></div>
-              <div class="text-truncate">{{ data["recipeMaterial"] }}</div>
-              <!-- <div class="text-truncate">{{ data["recipeMaterial"][1] }}</div>
+              <!-- {{data["recipeMaterial"]}} -->
+              <!-- <div class="text-truncate">{{ data["recipeMaterial"][0] }}</div>
+              <div class="text-truncate">{{ data["recipeMaterial"][1] }}</div>
               <div class="text-truncate">{{ data["recipeMaterial"][2] }}</div> -->
+              <ShowMaterials :materials="data['recipeMaterial']"></ShowMaterials>
+              <!-- <ShowMaterials></ShowMaterials> -->
               <div style="height: 1.5rem"></div>
               <div>{{ data["recipeCost"] }}</div>
             </div>
@@ -56,6 +59,7 @@
 // import axios from "axios";
 import SearchBar from "@/components/SearchBar";
 import SearchOne from "@/components/SearchOne";
+import ShowMaterials from "@/components/ShowMaterials"
 import { provide, ref, reactive } from "vue";
 
 export default {
@@ -63,6 +67,7 @@ export default {
   components: {
     SearchBar,
     SearchOne,
+    ShowMaterials,
   },
   setup() {
     const location = ref("hahahahahhah");
@@ -76,7 +81,7 @@ export default {
       mediumImageUrl: "",
       recipeCost: "",
       recipeId: "",
-      recipeMaterial: [""],
+      recipeMaterial: ["aaa","bbb","ccc"],
       recipeTitle: "",
       recipeUrl: "",
       smallImageUrl: "",
