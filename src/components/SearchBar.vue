@@ -2,7 +2,7 @@
   <div class="row justify-content-center pt-4 align-items-center">
     <div class="search col-5 col-sm-4">
       <div class="row justify-content-center">
-        <input type="text" v-model="mate" placeholder="食材を入力" class="search-input col-9 p-2" />
+        <input type="text" v-model="mate" placeholder="食材を入力" class="search-input col-9 p-2" @keypress.enter="get_recipe()"/>
         <button
           @click="get_recipe()"
           :disabled="buttonState"
@@ -28,7 +28,8 @@ export default {
     const userGeolocation = inject('geolocation')
     const updateUserLocation = inject('updateLocation')
     const materials = inject('materials',{data:[]})
-    const buttonState = inject('materials')
+    const buttonState = inject('button_state',false)
+    const Show = inject('show',false)
 
     return {
       userLocation,
@@ -36,18 +37,19 @@ export default {
       updateUserLocation,
       materials,
       buttonState,
+      Show,
     }
   },
   methods: {
     get_recipe() {
-      this.show = true;
+      this.Show = true;
       this.buttonState = true;
       this.materials.data = this.mate.replaceAll("　", " ").split(" ");
       console.log(this.materials)
       if (this.materials.data[0] == "") {
         window.alert("材料を入力してください");
         this.buttonState = false;
-        this.show = false;
+        this.Show = false;
         return null;
       }
       console.log(this.materials.data);

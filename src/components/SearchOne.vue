@@ -19,6 +19,8 @@ export default {
     const userGeolocation = inject < { userGeolocation: 0, latitude: 20 } > ('geolocation')
     const updateUserLocation = inject('updateLocation')
     const childData = inject ('refData', 'refData')
+    const Show = inject('show',false)
+
 
 
     return {
@@ -26,6 +28,7 @@ export default {
       userGeolocation,
       updateUserLocation,
       childData,
+      Show,
     }
   },
   methods: {

@@ -5,8 +5,6 @@
     </div>
     <SearchBar></SearchBar>
     <SearchOne></SearchOne>
-    <div>refData {{ refData[0] }}</div>
-
     <div v-show="show">
       <div class="row justify-content-center">
         <div
@@ -100,6 +98,8 @@ export default {
     provide("updateLocation", updateLocation);
 
     provide("refData", refData);
+    provide("button_state", button_state);
+    provide("show", show);
 
     return {
       location,
