@@ -6,7 +6,7 @@
     <SearchBar></SearchBar>
     <SearchOne></SearchOne>
     <div v-show="show">
-      <div class="row justify-content-center">
+      <!-- <div class="row justify-content-center">
         <div
           v-for="item in this.materials.data"
           v-bind:key="item"
@@ -14,7 +14,7 @@
         >
           <div>{{ item }}</div>
         </div>
-      </div>
+      </div> -->
       <div class="row justify-content-center mw-100 m-auto">
         <div
           v-for="data in this.refData"
@@ -37,12 +37,9 @@
                 {{ data["recipeTitle"] }}
               </div>
               <div style="height: 1.5rem"></div>
-              <!-- {{data["recipeMaterial"]}} -->
-              <!-- <div class="text-truncate">{{ data["recipeMaterial"][0] }}</div>
-              <div class="text-truncate">{{ data["recipeMaterial"][1] }}</div>
-              <div class="text-truncate">{{ data["recipeMaterial"][2] }}</div> -->
-              <ShowMaterials :materials="data['recipeMaterial']"></ShowMaterials>
-              <!-- <ShowMaterials></ShowMaterials> -->
+              <ShowMaterials
+                :materials="data['threeRecipeMaterial']"
+              ></ShowMaterials>
               <div style="height: 1.5rem"></div>
               <div>{{ data["recipeCost"] }}</div>
             </div>
@@ -59,7 +56,7 @@
 // import axios from "axios";
 import SearchBar from "@/components/SearchBar";
 import SearchOne from "@/components/SearchOne";
-import ShowMaterials from "@/components/ShowMaterials"
+import ShowMaterials from "@/components/ShowMaterials";
 import { provide, ref, reactive } from "vue";
 
 export default {
@@ -81,7 +78,7 @@ export default {
       mediumImageUrl: "",
       recipeCost: "",
       recipeId: "",
-      recipeMaterial: ["aaa","bbb","ccc"],
+      recipeMaterial: ["aaa", "bbb", "ccc"],
       recipeTitle: "",
       recipeUrl: "",
       smallImageUrl: "",
@@ -91,7 +88,7 @@ export default {
     const recipe_material = ref(false);
     const mate = ref("");
     const materials = ref({
-      data:[]
+      data: [],
     });
 
     const updateLocation = () => {
@@ -119,62 +116,12 @@ export default {
     };
   },
   data: () => ({
-    // materials: {
-    //   data: [],
-    // },
-    // mate: "",
-    // title: [],
-    // url: [],
-    // refData: null,
-    // button_state: false,
-    // show: true,
-    // recipe_material: []
+
   }),
 
   mounted() {},
   methods: {
-    // random() {
-    //   axios
-    //     .get(
-    //       "https://banmeshii.herokuapp.com/random_one"
-    //     )
-    //     .then(
-    //       (response) => (
-    //         (this.refData = response.data.data)
-    //       )
-    //     )
-    //     .catch(function (error) {
-    //       console.log(error);
-    //     });
-    // },
-    // get_recipe() {
-    //   this.show = true;
-    //   this.button_state = true;
-    //   this.materials.data = this.mate.replaceAll("", " ").split(" ");
-    //   if (this.materials.data[0] == "") {
-    //     window.alert("材料を入力してください");
-    //     this.button_state = false;
-    //     this.show = false;
-    //     return null;
-    //   }
-    //   // console.log(this.materials.data);
-    //   axios
-    //     .post(
-    //       "https://banmeshii.herokuapp.com/get_recipe",
-    //       this.materials
-    //     )
-    //     .then(
-    //       (response) => (
-    //         (this.refData = response.data.data),
-    //         // console.log(response.data),
-    //         (this.button_state = false)
-    //       )
-    //     )
-    //     .catch(function (error) {
-    //       console.log(error);
-    //       this.button_state = false;
-    //     });
-    // },
+
   },
 };
 </script>

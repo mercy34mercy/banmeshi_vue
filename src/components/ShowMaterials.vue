@@ -1,7 +1,6 @@
 <template>
   <div class="ShowMaterials">
-    <div>ThreeData:{{ThreeData}}</div>
-    <div v-for="i in 3" :key="i" >
+    <div v-for="material in this.materials" :key="material" >
       <div class="text-truncate">{{ material }}</div>
     </div>
   </div>
@@ -13,32 +12,8 @@ export default {
   name: "ShowMaterials",
   props: {
     materials:Array ,
-    // materials: Array = ["冷凍うなぎ", "みりん", "しょうゆ", "砂糖"],
   },
-  setup(props) {
-    let ThreeData
-    for(let i in 3){
-      ThreeData.push(props.materials[i])
-    }
-    // props.materials = props.materials.slice(0,3)
-    // let materials = "["とうもろこし","バター・黒胡椒・しょうゆ"]"
-    // const divMaterials = ref(
-    //   this.materials
-    // );
-    // console.log(this.materials)
-    // const divMaterials = ref(
-    //   this.materials.split(",").replace("[", "").replace("", "")
-    // );
 
-    // function devide(){
-    //   return divMaterials = this.materials.split(",").replace("[","").replace("","")
-    // }
-    return {
-      // devide,
-      // divMaterials,
-      ThreeData,
-    };
-  },
 };
 </script>
 

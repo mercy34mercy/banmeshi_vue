@@ -29,18 +29,12 @@ export default {
     msg: String,
   },
   setup() {
-    const userLocation = inject("location", "The Universe");
-    const userGeolocation = inject("geolocation");
-    const updateUserLocation = inject("updateLocation");
     const materials = inject("materials", { data: [] });
     const buttonState = inject("button_state", false);
     const Show = inject("show", false);
     const childData = inject("refData", "refData");
 
     return {
-      userLocation,
-      userGeolocation,
-      updateUserLocation,
       materials,
       buttonState,
       Show,
