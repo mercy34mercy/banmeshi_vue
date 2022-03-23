@@ -1,7 +1,7 @@
 <template>
   <div class="container h-100 w-100 justify-content-center align-self-center">
     <div class="home">
-      <img alt="Vue logo" src="../assets/artboard.png" />
+      <img src="../assets/artboard.png" class="img-fluid" alt="Vue logo">
     </div>
     <SearchBar></SearchBar>
     <SearchOne></SearchOne>
@@ -135,7 +135,8 @@ export default {
   color: #100e29;
 }
 img {
-  max-width: 800px;
+  max-width: 100%;
+  height: auto;
 }
 
 .recipe-box {
