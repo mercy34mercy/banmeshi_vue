@@ -32,23 +32,27 @@ export default {
     const materials = inject("materials", { data: [] });
     const buttonState = inject("button_state", false);
     const Show = inject("show", false);
+    const isLoading = inject("isLoading", false);
     const childData = inject("refData", "refData");
 
     return {
       materials,
       buttonState,
       Show,
+      isLoading,
       childData,
     };
   },
   methods: {
     get_recipe() {
       this.buttonState = true;
+      this.isLoading = true;
       this.materials.data = this.mate.replaceAll("　", " ").split(" ");
       if (this.materials.data[0] == "") {
         window.alert("材料を入力してください");
         this.buttonState = false;
         this.Show = false;
+        this.isLoading = false;
         return null;
       }
       axios
@@ -57,7 +61,8 @@ export default {
           (response) => (
             (this.childData = response.data.data),
             (this.buttonState = false),
-            (this.Show = true)
+            (this.Show = true),
+            (this.isLoading = false)
           )
         )
         .catch(function (error) {

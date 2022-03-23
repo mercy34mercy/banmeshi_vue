@@ -17,23 +17,28 @@ export default {
   setup() {
     const childData = inject ('refData', 'refData')
     const Show = inject('show',false)
+    const isLoading = inject('isLoading',false)
 
 
 
     return {
       childData,
       Show,
+      isLoading
     }
   },
   methods: {
     random() { 
+      this.isLoading = true
       axios
         .get(
           "https://banmeshii.herokuapp.com/random_one"
         )
         .then(
           (response) => (
-            (this.childData = response.data.data)
+            (this.childData = response.data.data),
+            (this.isLoading = false),
+            (this.Show = true)
 
           )
         )
