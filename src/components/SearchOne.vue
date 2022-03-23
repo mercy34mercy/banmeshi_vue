@@ -15,42 +15,18 @@ export default {
     msg: String
   },
   setup() {
-    const userLocation = inject ('location', 'The Universe')
-    const userGeolocation = inject < { userGeolocation: 0, latitude: 20 } > ('geolocation')
-    const updateUserLocation = inject('updateLocation')
     const childData = inject ('refData', 'refData')
     const Show = inject('show',false)
 
 
 
     return {
-      userLocation,
-      userGeolocation,
-      updateUserLocation,
       childData,
       Show,
     }
   },
   methods: {
-    random() {
-      // this.updateUserLocation();
-      // this.userLocation = "upudated"
-      // this.userLocation = {data:"datadayo"}
-//       this.userLocation = {
-//     "foodImageUrl": "https://image.space.rakuten.co.jp/d/strg/ctrl/3/00224f52c58693c74a4ae303ae426c5c352b5b9f.25.2.3.2.jpg",
-//     "mediumImageUrl": "https://image.space.rakuten.co.jp/d/strg/ctrl/3/00224f52c58693c74a4ae303ae426c5c352b5b9f.25.2.3.2.jpg?thum=54",
-//     "recipeCost": "500円前後",
-//     "recipeId": "1540010826",
-//     "recipeMaterial": [
-//         "とうもろこし",
-//         "バター・黒胡椒・しょうゆ"
-//     ],
-//     "recipeTitle": "粒たっぷり！とうもろこしごはん",
-//     "recipeUrl": "https://recipe.rakuten.co.jp/recipe/1540010826/",
-//     "smallImageUrl": "https://image.space.rakuten.co.jp/d/strg/ctrl/3/00224f52c58693c74a4ae303ae426c5c352b5b9f.25.2.3.2.jpg?thum=55"
-// };
-      // console.log(this.userLocation);
- 
+    random() { 
       axios
         .get(
           "https://banmeshii.herokuapp.com/random_one"
