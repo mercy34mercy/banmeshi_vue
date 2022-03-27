@@ -8,6 +8,7 @@
           placeholder="食材を入力"
           class="search-input col-9 p-2"
           @keypress.enter="get_recipe()"
+          @change="create_mate()"
         />
         <button
           @click="get_recipe()"
@@ -17,14 +18,19 @@
       </div>
     </div>
   </div>
+  <search-one></search-one>
 </template>
 
 <script>
 import { inject } from "vue";
 import axios from "axios";
+import SearchOne from "@/components/SearchOne";
 
 export default {
   name: "SearchBar",
+  components: {
+    SearchOne,
+  },
   props: {
     msg: String,
   },
@@ -43,7 +49,15 @@ export default {
       childData,
     };
   },
+  provide() {
+    return {
+      materials: this.materials
+    }
+  },
   methods: {
+    create_mate() {
+      this.materials.data = this.mate.replaceAll("　", " ").split(" ");
+    },
     get_recipe() {
       this.buttonState = true;
       this.isLoading = true;

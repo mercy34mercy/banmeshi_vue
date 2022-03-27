@@ -4,7 +4,6 @@
         <img src="../assets/artboard.png" class="img-fluid" alt="Vue logo" />
       </div>
       <SearchBar></SearchBar>
-      <SearchOne></SearchOne>
       <div v-if="isLoading" class="loader">
         <div class="loader"></div>
       </div>
@@ -60,7 +59,6 @@
 <script>
 // import axios from "axios";
 import SearchBar from "@/components/SearchBar";
-import SearchOne from "@/components/SearchOne";
 import ShowMaterials from "@/components/ShowMaterials";
 import { provide, ref, reactive } from "vue";
 
@@ -68,7 +66,6 @@ export default {
   name: "Home",
   components: {
     SearchBar,
-    SearchOne,
     ShowMaterials,
   },
   setup() {

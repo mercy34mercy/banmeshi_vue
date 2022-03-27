@@ -1,6 +1,11 @@
 <template>
   <div class="row pt-4 justify-content-center">
-    <button class="random-button col-4 col-xs-1 p-0 pt-2 pb-2" @click="random()">今日の晩飯</button>
+    <button
+      class="random-button col-4 col-xs-1 p-0 pt-2 pb-2"
+      @click="random()"
+    >
+      今日の晩飯
+    </button>
   </div>
 </template>
 
@@ -18,21 +23,27 @@ export default {
     const childData = inject ('refData', 'refData')
     const Show = inject('show',false)
     const isLoading = inject('isLoading',false)
-
+    const materials = inject('materials', { data: [] })
 
 
     return {
       childData,
       Show,
-      isLoading
+      isLoading,
+      materials
     }
   },
   methods: {
     random() { 
       this.isLoading = true
+      if (this.materials.data[0] == "" || this.materials.data[0] == '' || this.materials.data.length == 0) {
+        window.alert("材料を入力してください");
+        this.isLoading = false;
+        return null;
+      }
       axios
-        .get(
-          "https://banmeshii.herokuapp.com/random_one"
+        .post(
+          "https://banmeshii.herokuapp.com/random_one_by_mate",this.materials
         )
         .then(
           (response) => (
@@ -42,9 +53,10 @@ export default {
 
           )
         )
-        .catch(function (error) {
-          console.log(error);
-        });
+        .catch((error) =>(
+          (console.log(error)),
+          (this.isLoading = false)
+        ));
     },
 
   },
