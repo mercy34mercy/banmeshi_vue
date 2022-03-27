@@ -2,6 +2,13 @@
 <link rel="apple-touch-icon" href="<%= htmlWebpackPlugin.files.publicPath %>static/img/icons/apple-touch-icon-152x152.png">
 
 <meta name="msapplication-TileImage" content="<%= htmlWebpackPlugin.files.publicPath %>static/img/icons/mstile-150x150.png">
+
+<meta name="twitter:card" content="summary">
+<meta property="og:url" content="https://banmeshikun.com">
+<meta property="og:title" content="banmeshi">
+<meta property="og:description" content="食材から晩飯ガチャをひこう">
+<meta property="og:image" content="./assets/artboard.png">
+
   <!-- <div id="nav"> -->
     <!-- <router-link to="/">Home</router-link> -->
     <!-- <router-link to="/about">About</router-link> -->
