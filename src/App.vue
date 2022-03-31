@@ -10,14 +10,14 @@
       content="<%= htmlWebpackPlugin.files.publicPath %>static/img/icons/mstile-150x150.png"
     />
 
-    <meta name="twitter:card" content="summary_large_image" />
+    <!-- <meta name="twitter:card" content="summary_large_image" />
     <meta property="og:url" content="https://banmeshikun.com" />
     <meta property="og:title" content="banmeshi" />
-    <meta property="og:description" content="食材から晩飯ガチャをひこう" />
-    <meta
+    <meta property="og:description" content="食材から晩飯ガチャをひこう" /> -->
+    <!-- <meta
       property="og:image"
       content="https://banmeshikun.com/img/artboard.ac4143b8.png"
-    />
+    /> -->
   </head>
   <!-- <div id="nav"> -->
   <!-- <router-link to="/">Home</router-link> -->
