@@ -1,6 +1,6 @@
 {
   "name": "banmeshi",
-    "license": "UNLICENSED",
+  "license": "UNLICENSED",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -19,6 +19,7 @@
     "lodash": "^4.17.21",
     "register-service-worker": "^1.7.1",
     "vue": "^3.0.0",
+    "vue-gtag-next": "^1.14.0",
     "vue-resource": "^1.5.3",
     "vue-router": "^4.0.0-0",
     "vuex": "^4.0.0-0",

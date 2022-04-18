@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
+import { trackRouter } from "vue-gtag-next";
 
 const routes = [{
         path: '/',
@@ -20,5 +21,7 @@ const router = createRouter({
     history: createWebHistory(process.env.BASE_URL),
     routes
 })
+
+trackRouter(router);
 
 export default router
