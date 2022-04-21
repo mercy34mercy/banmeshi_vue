@@ -43,7 +43,7 @@ export default {
       }
       axios
         .post(
-          "https://banmeshii.herokuapp.com/random_one_by_mate",this.materials
+          "https://banmeshikun.azurewebsites.net/random_one_by_mate",this.materials
         )
         .then(
           (response) => (

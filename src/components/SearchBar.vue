@@ -70,7 +70,7 @@ export default {
         return null;
       }
       axios
-        .post("https://banmeshii.herokuapp.com/get_recipe", this.materials)
+        .post("https://banmeshikun.azurewebsites.net/random_one_by_mate", this.materials)
         .then(
           (response) => (
             (this.childData = response.data.data),
